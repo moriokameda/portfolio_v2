@@ -11,7 +11,7 @@ export default function Home() {
             Welcome to My Portfolio
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            I'm a passionate developer creating amazing digital experiences with modern
+            I&apos;m a passionate developer creating amazing digital experiences with modern
             technologies.
           </p>
           <div className="flex gap-4 justify-center">

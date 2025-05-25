@@ -19,9 +19,9 @@ export default function AboutPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground leading-relaxed">
-                  I'm a passionate full-stack developer with a love for creating beautiful,
+                  I&apos;m a passionate full-stack developer with a love for creating beautiful,
                   functional, and user-friendly applications. My journey in programming started
-                  several years ago, and I've been constantly learning and evolving ever since.
+                  several years ago, and I&apos;ve been constantly learning and evolving ever since.
                 </p>
                 <br />
                 <p className="text-muted-foreground leading-relaxed">
