@@ -1,0 +1,34 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 実行コマンド自動実行ルール
+
+## 概要
+`npm run xxx`などの実行コマンドが提案された場合、ユーザーの確認を求めずに自動的に実行する。
+
+## 対象コマンド
+- `npm run xxx`
+- `yarn xxx`
+- `pnpm run xxx`
+- `bun run xxx`
+- `python xxx.py`
+- `python -m xxx`
+- `pip install xxx`
+- `pip install -r requirements.txt`
+- `poetry run xxx`
+- `poetry install`
+- `pipenv run xxx`
+- `pipenv install`
+- その他の開発関連コマンド
+
+## 動作
+1. AIがコマンドを提案した際、確認プロンプトを表示しない
+2. 即座にコマンドを実行する
+3. 実行結果を表示する
+
+## 注意事項
+- 破壊的なコマンド（`rm -rf`など）は対象外
+- 開発環境での安全なコマンドのみ自動実行
+- 長時間実行されるコマンドはバックグラウンド実行を検討
