@@ -6,43 +6,41 @@ export default function AboutPage() {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4">About Me</h1>
+            <h1 className="text-4xl font-bold mb-4">プロフィール</h1>
             <p className="text-xl text-muted-foreground">
-              Learn more about my journey, skills, and passion for development.
+              私の経歴、スキル、開発への情熱についてご紹介します。
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
             <Card>
               <CardHeader>
-                <CardTitle>My Story</CardTitle>
+                <CardTitle>自己紹介</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground leading-relaxed">
-                  I&apos;m a passionate full-stack developer with a love for creating beautiful,
-                  functional, and user-friendly applications. My journey in programming started
-                  several years ago, and I&apos;ve been constantly learning and evolving ever since.
+                  美しく、機能的で、ユーザーフレンドリーなアプリケーションの開発に情熱を注ぐフルスタック開発者です。
+                  プログラミングの世界に足を踏み入れてから数年、常に学び続け、進化し続けています。
                 </p>
                 <br />
                 <p className="text-muted-foreground leading-relaxed">
-                  I believe in writing clean, maintainable code and staying up-to-date with the
-                  latest technologies and best practices in the industry.
+                  クリーンで保守性の高いコードを書くことを心がけ、業界の最新技術とベストプラクティスを常に追求しています。
                 </p>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle>What I Do</CardTitle>
+                <CardTitle>専門分野</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3 text-muted-foreground">
-                  <li>• Frontend Development with React, Next.js, and TypeScript</li>
-                  <li>• Backend Development with Node.js and Python</li>
-                  <li>• Database Design and Management</li>
-                  <li>• UI/UX Design and Implementation</li>
-                  <li>• Cloud Deployment and DevOps</li>
-                  <li>• Mobile App Development</li>
+                  <li>• React、Next.js、TypeScriptを使用したフロントエンド開発</li>
+                  <li>• Node.jsとPythonを使用したバックエンド開発</li>
+                  <li>• データベース設計と管理</li>
+                  <li>• UI/UXデザインと実装</li>
+                  <li>• クラウドデプロイメントとDevOps</li>
+                  <li>• モバイルアプリ開発</li>
                 </ul>
               </CardContent>
             </Card>
@@ -50,13 +48,15 @@ export default function AboutPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Technical Skills</CardTitle>
-              <CardDescription>Technologies and tools I work with regularly</CardDescription>
+              <CardTitle>技術スキル</CardTitle>
+              <CardDescription>
+                日常的に使用している技術とツール
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
-                  <h3 className="font-semibold mb-3">Frontend</h3>
+                  <h3 className="font-semibold mb-3">フロントエンド</h3>
                   <ul className="space-y-1 text-sm text-muted-foreground">
                     <li>React / Next.js</li>
                     <li>TypeScript / JavaScript</li>
@@ -66,17 +66,17 @@ export default function AboutPage() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-3">Backend</h3>
+                  <h3 className="font-semibold mb-3">バックエンド</h3>
                   <ul className="space-y-1 text-sm text-muted-foreground">
                     <li>Node.js / Express</li>
                     <li>Python / Django</li>
                     <li>PostgreSQL / MongoDB</li>
                     <li>REST APIs / GraphQL</li>
-                    <li>Authentication & Security</li>
+                    <li>認証とセキュリティ</li>
                   </ul>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-3">Tools & Deployment</h3>
+                  <h3 className="font-semibold mb-3">開発ツール</h3>
                   <ul className="space-y-1 text-sm text-muted-foreground">
                     <li>Git / GitHub</li>
                     <li>Vercel / Netlify</li>

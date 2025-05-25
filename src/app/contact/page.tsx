@@ -53,17 +53,17 @@ export default function ContactPage() {
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4">Get In Touch</h1>
+            <h1 className="text-4xl font-bold mb-4">お問い合わせ</h1>
             <p className="text-xl text-muted-foreground">
-              I&apos;d love to hear from you. Send me a message and I&apos;ll respond as soon as possible.
+              お気軽にメッセージをお送りください。できるだけ早くご返信いたします。
             </p>
           </div>
 
           <Card>
             <CardHeader>
-              <CardTitle>Contact Form</CardTitle>
+              <CardTitle>お問い合わせフォーム</CardTitle>
               <CardDescription>
-                Fill out the form below and I&apos;ll get back to you within 24 hours.
+                以下のフォームにご記入ください。24時間以内にご返信いたします。
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -74,53 +74,53 @@ export default function ContactPage() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Name</FormLabel>
+                        <FormLabel>お名前</FormLabel>
                         <FormControl>
-                          <Input placeholder="Your full name" {...field} />
+                          <Input placeholder="お名前をご入力ください" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-
+                  
                   <FormField
                     control={form.control}
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel>メールアドレス</FormLabel>
                         <FormControl>
-                          <Input placeholder="your.email@example.com" type="email" {...field} />
+                          <Input placeholder="example@example.com" type="email" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-
+                  
                   <FormField
                     control={form.control}
                     name="subject"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Subject</FormLabel>
+                        <FormLabel>件名</FormLabel>
                         <FormControl>
-                          <Input placeholder="What's this about?" {...field} />
+                          <Input placeholder="お問い合わせの件名をご入力ください" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-
+                  
                   <FormField
                     control={form.control}
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Message</FormLabel>
+                        <FormLabel>メッセージ</FormLabel>
                         <FormControl>
                           <textarea
                             className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                            placeholder="Tell me about your project or just say hello!"
+                            placeholder="プロジェクトについてのご相談や、その他のお問い合わせをご記入ください"
                             {...field}
                           />
                         </FormControl>
@@ -128,9 +128,9 @@ export default function ContactPage() {
                       </FormItem>
                     )}
                   />
-
+                  
                   <Button type="submit" className="w-full" size="lg">
-                    Send Message
+                    送信する
                   </Button>
                 </form>
               </Form>

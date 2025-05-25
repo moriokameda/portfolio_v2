@@ -4,73 +4,69 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 const projects = [
   {
     id: 1,
-    title: 'E-Commerce Platform',
-    description:
-      'A full-stack e-commerce solution built with Next.js, TypeScript, and Stripe integration.',
-    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'PostgreSQL'],
-    image: '/api/placeholder/400/250',
-    github: 'https://github.com',
-    demo: 'https://demo.com',
+    title: "ECサイトプラットフォーム",
+    description: "Next.js、TypeScript、Stripeを統合したフルスタックECソリューション。",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe", "PostgreSQL"],
+    image: "/api/placeholder/400/250",
+    github: "https://github.com",
+    demo: "https://demo.com"
   },
   {
     id: 2,
-    title: 'Task Management App',
-    description:
-      'A collaborative task management application with real-time updates and team features.',
-    technologies: ['React', 'Node.js', 'Socket.io', 'MongoDB', 'Express'],
-    image: '/api/placeholder/400/250',
-    github: 'https://github.com',
-    demo: 'https://demo.com',
+    title: "タスク管理アプリ",
+    description: "リアルタイム更新とチーム機能を備えた協働タスク管理アプリケーション。",
+    technologies: ["React", "Node.js", "Socket.io", "MongoDB", "Express"],
+    image: "/api/placeholder/400/250",
+    github: "https://github.com",
+    demo: "https://demo.com"
   },
   {
     id: 3,
-    title: 'Weather Dashboard',
-    description:
-      'A responsive weather dashboard with location-based forecasts and interactive charts.',
-    technologies: ['React', 'Chart.js', 'OpenWeather API', 'CSS3'],
-    image: '/api/placeholder/400/250',
-    github: 'https://github.com',
-    demo: 'https://demo.com',
+    title: "天気予報ダッシュボード",
+    description: "位置情報ベースの予報とインタラクティブなチャートを備えたレスポンシブな天気ダッシュボード。",
+    technologies: ["React", "Chart.js", "OpenWeather API", "CSS3"],
+    image: "/api/placeholder/400/250",
+    github: "https://github.com",
+    demo: "https://demo.com"
   },
   {
     id: 4,
-    title: 'Blog Platform',
-    description: 'A modern blog platform with markdown support, comments, and admin dashboard.',
-    technologies: ['Next.js', 'MDX', 'Prisma', 'NextAuth.js'],
-    image: '/api/placeholder/400/250',
-    github: 'https://github.com',
-    demo: 'https://demo.com',
+    title: "ブログプラットフォーム",
+    description: "マークダウン対応、コメント機能、管理ダッシュボードを備えたモダンなブログプラットフォーム。",
+    technologies: ["Next.js", "MDX", "Prisma", "NextAuth.js"],
+    image: "/api/placeholder/400/250",
+    github: "https://github.com",
+    demo: "https://demo.com"
   },
   {
     id: 5,
-    title: 'Portfolio Website',
-    description:
-      'A responsive portfolio website showcasing projects and skills with modern design.',
-    technologies: ['Next.js', 'TypeScript', 'ShadCN UI', 'Tailwind CSS'],
-    image: '/api/placeholder/400/250',
-    github: 'https://github.com',
-    demo: 'https://demo.com',
+    title: "ポートフォリオサイト",
+    description: "モダンなデザインで作品とスキルを紹介するレスポンシブなポートフォリオサイト。",
+    technologies: ["Next.js", "TypeScript", "ShadCN UI", "Tailwind CSS"],
+    image: "/api/placeholder/400/250",
+    github: "https://github.com",
+    demo: "https://demo.com"
   },
   {
     id: 6,
-    title: 'Chat Application',
-    description: 'Real-time chat application with rooms, file sharing, and emoji support.',
-    technologies: ['React', 'Socket.io', 'Node.js', 'Express', 'MongoDB'],
-    image: '/api/placeholder/400/250',
-    github: 'https://github.com',
-    demo: 'https://demo.com',
-  },
-];
+    title: "チャットアプリケーション",
+    description: "ルーム機能、ファイル共有、絵文字対応を備えたリアルタイムチャットアプリケーション。",
+    technologies: ["React", "Socket.io", "Node.js", "Express", "MongoDB"],
+    image: "/api/placeholder/400/250",
+    github: "https://github.com",
+    demo: "https://demo.com"
+  }
+]
 
 export default function ProjectsPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-background to-muted py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">My Projects</h1>
+          <h1 className="text-4xl font-bold mb-4">プロジェクト一覧</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Here are some of the projects I&apos;ve worked on. Each one represents a unique challenge 
-            and learning experience in my development journey.
+            これまでに手がけたプロジェクトをご紹介します。それぞれのプロジェクトは、
+            私の開発者としての成長における独自の課題と学びを表しています。
           </p>
         </div>
 
@@ -85,7 +81,7 @@ export default function ProjectsPage() {
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="text-sm font-semibold mb-2">Technologies Used:</h4>
+                    <h4 className="text-sm font-semibold mb-2">使用技術：</h4>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
                         <span
@@ -97,13 +93,13 @@ export default function ProjectsPage() {
                       ))}
                     </div>
                   </div>
-
+                  
                   <div className="flex gap-2">
                     <Button variant="outline" size="sm" className="flex-1">
-                      View Code
+                      コードを見る
                     </Button>
                     <Button size="sm" className="flex-1">
-                      Live Demo
+                      デモを見る
                     </Button>
                   </div>
                 </div>
@@ -113,5 +109,5 @@ export default function ProjectsPage() {
         </div>
       </div>
     </main>
-  );
+  )
 }

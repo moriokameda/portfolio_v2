@@ -8,24 +8,21 @@ export default function Home() {
       <section className="container mx-auto px-4 py-20">
         <div className="text-center space-y-6">
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            Welcome to My Portfolio
+            ポートフォリオへようこそ
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            I&apos;m a passionate developer creating amazing digital experiences with modern
-            technologies.
+            モダンな技術を使用して、素晴らしいデジタル体験を創造するエンジニアです。
           </p>
           <div className="flex gap-4 justify-center">
-            <Button size="lg">View My Work</Button>
-            <Button variant="outline" size="lg">
-              Contact Me
-            </Button>
+            <Button size="lg">作品を見る</Button>
+            <Button variant="outline" size="lg">お問い合わせ</Button>
           </div>
         </div>
       </section>
 
       {/* Projects Section */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-center mb-12">Featured Projects</h2>
+        <h2 className="text-3xl font-bold text-center mb-12">主なプロジェクト</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3].map((project) => (
             <Card key={project} className="hover:shadow-lg transition-shadow">
@@ -48,7 +45,7 @@ export default function Home() {
 
       {/* Skills Section */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-center mb-12">Skills & Technologies</h2>
+        <h2 className="text-3xl font-bold text-center mb-12">スキルと技術</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
             'React',
