@@ -1,5 +1,51 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { 
+  SiTypescript, 
+  SiNextdotjs,
+  SiNodedotjs, 
+  SiPython, 
+  SiPostgresql, 
+  SiAmazon,
+  SiVuedotjs,
+  SiNuxtdotjs,
+  SiKotlin,
+  SiSpringboot,
+  SiGraphql,
+  SiMysql,
+  SiOpenjdk,
+  SiGo,
+  SiPhp,
+  SiLaravel
+} from 'react-icons/si';
+import type { IconType } from 'react-icons';
+
+// スキルデータの型定義
+type SkillData = {
+  icon: IconType;
+  color: string;
+  name: string;
+};
+
+// アイコンとスキル名のマッピング（公式カラー付き）
+const skillData: SkillData[] = [
+  { icon: SiVuedotjs, color: '#4FC08D', name: 'Vue.js' },
+  { icon: SiNuxtdotjs, color: '#00DC82', name: 'Nuxt.js' },
+  { icon: SiTypescript, color: '#3178C6', name: 'TypeScript' },
+  { icon: SiNextdotjs, color: '#000000', name: 'Next.js' },
+  { icon: SiNodedotjs, color: '#339933', name: 'Node.js' },
+  { icon: SiPython, color: '#3776AB', name: 'Python' },
+  { icon: SiOpenjdk, color: '#007396', name: 'Java' },
+  { icon: SiGo, color: '#00ADD8', name: 'Go' },
+  { icon: SiPhp, color: '#777BB4', name: 'PHP' },
+  { icon: SiLaravel, color: '#FF2D20', name: 'Laravel' },
+  { icon: SiKotlin, color: '#7F52FF', name: 'Kotlin' },
+  { icon: SiSpringboot, color: '#6DB33F', name: 'Spring Boot' },
+  { icon: SiGraphql, color: '#E10098', name: 'GraphQL' },
+  { icon: SiPostgresql, color: '#4169E1', name: 'PostgreSQL' },
+  { icon: SiMysql, color: '#4479A1', name: 'MySQL' },
+  { icon: SiAmazon, color: '#FF9900', name: 'AWS' }
+];
 
 export default function Home() {
   return (
@@ -56,25 +102,26 @@ export default function Home() {
           スキルと技術
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            'React',
-            'TypeScript',
-            'Next.js',
-            'Tailwind CSS',
-            'Node.js',
-            'Python',
-            'PostgreSQL',
-            'AWS',
-          ].map((skill) => (
-            <Card
-              key={skill}
-              className="text-center p-4 bg-background/80 backdrop-blur-sm border-background/20"
-            >
-              <CardContent className="p-0">
-                <h3 className="font-semibold">{skill}</h3>
-              </CardContent>
-            </Card>
-          ))}
+          {skillData.map((skill) => {
+            const IconComponent = skill.icon;
+            
+            return (
+              <Card
+                key={skill.name}
+                className="text-center p-4 bg-background/80 backdrop-blur-sm border-background/20 hover:shadow-md transition-all"
+              >
+                <CardContent className="p-2 flex flex-col items-center gap-2">
+                  <div className="p-3 rounded-full" style={{ backgroundColor: `${skill.color}20` }}>
+                    <IconComponent 
+                      className="text-4xl" 
+                      style={{ color: skill.color }}
+                    />
+                  </div>
+                  <h3 className="font-semibold">{skill.name}</h3>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
       </section>
     </main>
