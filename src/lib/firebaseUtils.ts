@@ -1,6 +1,14 @@
+import { child, get, ref, set } from 'firebase/database';
+import {
+  type CollectionReference,
+  type Query,
+  addDoc,
+  collection,
+  getDocs,
+  query,
+  where,
+} from 'firebase/firestore';
 import { db, realtimeDb } from './firebase';
-import { collection, addDoc, getDocs, query, where, Query, CollectionReference } from 'firebase/firestore';
-import { ref, set, get, child } from 'firebase/database';
 
 // 共通の型定義
 type FirestoreData = Record<string, unknown>;
@@ -18,7 +26,11 @@ export const addToFirestore = async (collectionName: string, data: FirestoreData
   }
 };
 
-export const getFromFirestore = async (collectionName: string, field?: string, value?: QueryValue) => {
+export const getFromFirestore = async (
+  collectionName: string,
+  field?: string,
+  value?: QueryValue
+) => {
   try {
     let q: Query | CollectionReference;
     if (field && value !== undefined) {

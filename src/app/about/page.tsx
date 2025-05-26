@@ -25,11 +25,8 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen py-20 relative">
       {/* 白色のオーバーレイ - スクロールに応じて不透明度が変わる */}
-      <div 
-        className="absolute inset-0 bg-white z-0"
-        style={{ opacity: scrollOpacity }}
-      ></div>
-      
+      <div className="absolute inset-0 bg-white z-0" style={{ opacity: scrollOpacity }} />
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12 bg-background/60 p-6 rounded-lg backdrop-blur-sm">
@@ -46,7 +43,7 @@ export default function AboutPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground leading-relaxed">
-                  初めまして。ウェブエンジニアをしている森生と申します。 
+                  初めまして。ウェブエンジニアをしている森生と申します。
                 </p>
                 <br />
                 <p className="text-muted-foreground leading-relaxed">

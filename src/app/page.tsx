@@ -1,24 +1,24 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { 
-  SiTypescript, 
-  SiNextdotjs,
-  SiNodedotjs, 
-  SiPython, 
-  SiPostgresql, 
-  SiAmazon,
-  SiVuedotjs,
-  SiNuxtdotjs,
-  SiKotlin,
-  SiSpringboot,
-  SiGraphql,
-  SiMysql,
-  SiOpenjdk,
-  SiGo,
-  SiPhp,
-  SiLaravel
-} from 'react-icons/si';
 import type { IconType } from 'react-icons';
+import {
+  SiAmazon,
+  SiGo,
+  SiGraphql,
+  SiKotlin,
+  SiLaravel,
+  SiMysql,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiNuxtdotjs,
+  SiOpenjdk,
+  SiPhp,
+  SiPostgresql,
+  SiPython,
+  SiSpringboot,
+  SiTypescript,
+  SiVuedotjs,
+} from 'react-icons/si';
 
 // スキルデータの型定義
 type SkillData = {
@@ -44,7 +44,7 @@ const skillData: SkillData[] = [
   { icon: SiGraphql, color: '#E10098', name: 'GraphQL' },
   { icon: SiPostgresql, color: '#4169E1', name: 'PostgreSQL' },
   { icon: SiMysql, color: '#4479A1', name: 'MySQL' },
-  { icon: SiAmazon, color: '#FF9900', name: 'AWS' }
+  { icon: SiAmazon, color: '#FF9900', name: 'AWS' },
 ];
 
 export default function Home() {
@@ -104,7 +104,7 @@ export default function Home() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {skillData.map((skill) => {
             const IconComponent = skill.icon;
-            
+
             return (
               <Card
                 key={skill.name}
@@ -112,10 +112,7 @@ export default function Home() {
               >
                 <CardContent className="p-2 flex flex-col items-center gap-2">
                   <div className="p-3 rounded-full" style={{ backgroundColor: `${skill.color}20` }}>
-                    <IconComponent 
-                      className="text-4xl" 
-                      style={{ color: skill.color }}
-                    />
+                    <IconComponent className="text-4xl" style={{ color: skill.color }} />
                   </div>
                   <h3 className="font-semibold">{skill.name}</h3>
                 </CardContent>
