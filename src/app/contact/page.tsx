@@ -82,7 +82,7 @@ export default function ContactPage() {
                       </FormItem>
                     )}
                   />
-                  
+
                   <FormField
                     control={form.control}
                     name="email"
@@ -96,7 +96,7 @@ export default function ContactPage() {
                       </FormItem>
                     )}
                   />
-                  
+
                   <FormField
                     control={form.control}
                     name="subject"
@@ -110,7 +110,7 @@ export default function ContactPage() {
                       </FormItem>
                     )}
                   />
-                  
+
                   <FormField
                     control={form.control}
                     name="message"
@@ -128,7 +128,7 @@ export default function ContactPage() {
                       </FormItem>
                     )}
                   />
-                  
+
                   <Button type="submit" className="w-full" size="lg">
                     送信する
                   </Button>

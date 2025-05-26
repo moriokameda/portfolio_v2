@@ -4,59 +4,62 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 const projects = [
   {
     id: 1,
-    title: "ECサイトプラットフォーム",
-    description: "Next.js、TypeScript、Stripeを統合したフルスタックECソリューション。",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe", "PostgreSQL"],
-    image: "/api/placeholder/400/250",
-    github: "https://github.com",
-    demo: "https://demo.com"
+    title: 'ECサイトプラットフォーム',
+    description: 'Next.js、TypeScript、Stripeを統合したフルスタックECソリューション。',
+    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'PostgreSQL'],
+    image: '/api/placeholder/400/250',
+    github: 'https://github.com',
+    demo: 'https://demo.com',
   },
   {
     id: 2,
-    title: "タスク管理アプリ",
-    description: "リアルタイム更新とチーム機能を備えた協働タスク管理アプリケーション。",
-    technologies: ["React", "Node.js", "Socket.io", "MongoDB", "Express"],
-    image: "/api/placeholder/400/250",
-    github: "https://github.com",
-    demo: "https://demo.com"
+    title: 'タスク管理アプリ',
+    description: 'リアルタイム更新とチーム機能を備えた協働タスク管理アプリケーション。',
+    technologies: ['React', 'Node.js', 'Socket.io', 'MongoDB', 'Express'],
+    image: '/api/placeholder/400/250',
+    github: 'https://github.com',
+    demo: 'https://demo.com',
   },
   {
     id: 3,
-    title: "天気予報ダッシュボード",
-    description: "位置情報ベースの予報とインタラクティブなチャートを備えたレスポンシブな天気ダッシュボード。",
-    technologies: ["React", "Chart.js", "OpenWeather API", "CSS3"],
-    image: "/api/placeholder/400/250",
-    github: "https://github.com",
-    demo: "https://demo.com"
+    title: '天気予報ダッシュボード',
+    description:
+      '位置情報ベースの予報とインタラクティブなチャートを備えたレスポンシブな天気ダッシュボード。',
+    technologies: ['React', 'Chart.js', 'OpenWeather API', 'CSS3'],
+    image: '/api/placeholder/400/250',
+    github: 'https://github.com',
+    demo: 'https://demo.com',
   },
   {
     id: 4,
-    title: "ブログプラットフォーム",
-    description: "マークダウン対応、コメント機能、管理ダッシュボードを備えたモダンなブログプラットフォーム。",
-    technologies: ["Next.js", "MDX", "Prisma", "NextAuth.js"],
-    image: "/api/placeholder/400/250",
-    github: "https://github.com",
-    demo: "https://demo.com"
+    title: 'ブログプラットフォーム',
+    description:
+      'マークダウン対応、コメント機能、管理ダッシュボードを備えたモダンなブログプラットフォーム。',
+    technologies: ['Next.js', 'MDX', 'Prisma', 'NextAuth.js'],
+    image: '/api/placeholder/400/250',
+    github: 'https://github.com',
+    demo: 'https://demo.com',
   },
   {
     id: 5,
-    title: "ポートフォリオサイト",
-    description: "モダンなデザインで作品とスキルを紹介するレスポンシブなポートフォリオサイト。",
-    technologies: ["Next.js", "TypeScript", "ShadCN UI", "Tailwind CSS"],
-    image: "/api/placeholder/400/250",
-    github: "https://github.com",
-    demo: "https://demo.com"
+    title: 'ポートフォリオサイト',
+    description: 'モダンなデザインで作品とスキルを紹介するレスポンシブなポートフォリオサイト。',
+    technologies: ['Next.js', 'TypeScript', 'ShadCN UI', 'Tailwind CSS'],
+    image: '/api/placeholder/400/250',
+    github: 'https://github.com',
+    demo: 'https://demo.com',
   },
   {
     id: 6,
-    title: "チャットアプリケーション",
-    description: "ルーム機能、ファイル共有、絵文字対応を備えたリアルタイムチャットアプリケーション。",
-    technologies: ["React", "Socket.io", "Node.js", "Express", "MongoDB"],
-    image: "/api/placeholder/400/250",
-    github: "https://github.com",
-    demo: "https://demo.com"
-  }
-]
+    title: 'チャットアプリケーション',
+    description:
+      'ルーム機能、ファイル共有、絵文字対応を備えたリアルタイムチャットアプリケーション。',
+    technologies: ['React', 'Socket.io', 'Node.js', 'Express', 'MongoDB'],
+    image: '/api/placeholder/400/250',
+    github: 'https://github.com',
+    demo: 'https://demo.com',
+  },
+];
 
 export default function ProjectsPage() {
   return (
@@ -93,7 +96,7 @@ export default function ProjectsPage() {
                       ))}
                     </div>
                   </div>
-                  
+
                   <div className="flex gap-2">
                     <Button variant="outline" size="sm" className="flex-1">
                       コードを見る
@@ -109,5 +112,5 @@ export default function ProjectsPage() {
         </div>
       </div>
     </main>
-  )
+  );
 }

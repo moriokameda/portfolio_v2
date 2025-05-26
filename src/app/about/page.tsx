@@ -49,9 +49,7 @@ export default function AboutPage() {
           <Card>
             <CardHeader>
               <CardTitle>技術スキル</CardTitle>
-              <CardDescription>
-                日常的に使用している技術とツール
-              </CardDescription>
+              <CardDescription>日常的に使用している技術とツール</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

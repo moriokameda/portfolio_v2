@@ -3,29 +3,36 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-background to-muted">
+    <main className="min-h-screen">
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20">
-        <div className="text-center space-y-6">
+        <div className="text-center space-y-6 bg-background/80 backdrop-blur-sm p-8 rounded-lg inline-block mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            ポートフォリオへようこそ
+            Mkameのポートフォリオへようこそ
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-foreground max-w-2xl mx-auto">
             モダンな技術を使用して、素晴らしいデジタル体験を創造するエンジニアです。
           </p>
           <div className="flex gap-4 justify-center">
             <Button size="lg">作品を見る</Button>
-            <Button variant="outline" size="lg">お問い合わせ</Button>
+            <Button variant="outline" size="lg">
+              お問い合わせ
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Projects Section */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-center mb-12">主なプロジェクト</h2>
+        <h2 className="text-3xl font-bold text-center mb-12 bg-background/80 backdrop-blur-sm inline-block px-6 py-2 rounded-lg mx-auto">
+          主なプロジェクト
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3].map((project) => (
-            <Card key={project} className="hover:shadow-lg transition-shadow">
+            <Card
+              key={project}
+              className="hover:shadow-lg transition-shadow bg-background/80 backdrop-blur-sm border-background/20"
+            >
               <CardHeader>
                 <CardTitle>Project {project}</CardTitle>
                 <CardDescription>
@@ -33,7 +40,7 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="aspect-video bg-muted rounded-md mb-4" />
+                <div className="aspect-video bg-muted/50 rounded-md mb-4" />
                 <Button variant="outline" className="w-full">
                   View Details
                 </Button>
@@ -45,7 +52,9 @@ export default function Home() {
 
       {/* Skills Section */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-center mb-12">スキルと技術</h2>
+        <h2 className="text-3xl font-bold text-center mb-12 bg-background/80 backdrop-blur-sm inline-block px-6 py-2 rounded-lg mx-auto">
+          スキルと技術
+        </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
             'React',
@@ -57,7 +66,10 @@ export default function Home() {
             'PostgreSQL',
             'AWS',
           ].map((skill) => (
-            <Card key={skill} className="text-center p-4">
+            <Card
+              key={skill}
+              className="text-center p-4 bg-background/80 backdrop-blur-sm border-background/20"
+            >
               <CardContent className="p-0">
                 <h3 className="font-semibold">{skill}</h3>
               </CardContent>
