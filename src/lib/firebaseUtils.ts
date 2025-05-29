@@ -1,71 +1,139 @@
-import { child, get, ref, set } from 'firebase/database';
+import { getDownloadURL, ref as storageRef } from 'firebase/storage';
+import { db, storage } from './firebase';
+import type { DocumentData, QueryConstraint } from 'firebase/firestore';
 import {
-  type CollectionReference,
-  type Query,
-  addDoc,
   collection,
+  doc,
+  addDoc,
+  getDoc,
   getDocs,
+  updateDoc,
+  deleteDoc,
   query,
   where,
+  orderBy,
+  limit,
 } from 'firebase/firestore';
-import { db, realtimeDb } from './firebase';
 
-// 共通の型定義
-type FirestoreData = Record<string, unknown>;
-type RealtimeDBData = Record<string, unknown>;
-type QueryValue = string | number | boolean | null;
+// Storage操作
+export const getImageUrl = async (imagePath: string): Promise<string> => {
+  try {
+    const reference = storageRef(storage, imagePath);
+    return await getDownloadURL(reference);
+  } catch (error) {
+    console.error('Error getting image URL: ', error);
+    throw error;
+  }
+};
 
-// Firestore操作
-export const addToFirestore = async (collectionName: string, data: FirestoreData) => {
+// Firestoreのコレクション操作型定義
+export type FirestoreCollection = 'projects' | 'skills' | 'history' | 'contacts';
+
+// Firestoreデータ追加
+export const addDocument = async <T extends Record<string, unknown>>(
+  collectionName: FirestoreCollection,
+  data: T
+): Promise<string> => {
   try {
     const docRef = await addDoc(collection(db, collectionName), data);
     return docRef.id;
   } catch (error) {
-    console.error('Error adding document: ', error);
+    console.error(`Error adding document to ${collectionName}:`, error);
     throw error;
   }
 };
 
-export const getFromFirestore = async (
-  collectionName: string,
-  field?: string,
-  value?: QueryValue
-) => {
+// Firestoreデータ取得 (単一ドキュメント)
+export const getDocument = async <T>(
+  collectionName: FirestoreCollection,
+  docId: string
+): Promise<T | null> => {
   try {
-    let q: Query | CollectionReference;
-    if (field && value !== undefined) {
-      q = query(collection(db, collectionName), where(field, '==', value));
-    } else {
-      q = collection(db, collectionName);
+    const docRef = doc(db, collectionName, docId);
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+      return { id: docSnap.id, ...docSnap.data() } as T;
     }
-    const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-  } catch (error) {
-    console.error('Error getting documents: ', error);
-    throw error;
-  }
-};
-
-// Realtime Database操作
-export const addToRealtimeDB = async (path: string, data: RealtimeDBData) => {
-  try {
-    await set(ref(realtimeDb, path), data);
-    return true;
-  } catch (error) {
-    console.error('Error adding data to Realtime DB: ', error);
-    throw error;
-  }
-};
-
-export const getFromRealtimeDB = async (path: string) => {
-  try {
-    const snapshot = await get(child(ref(realtimeDb), path));
-    if (snapshot.exists()) {
-      return snapshot.val();
-    }
+    
     return null;
   } catch (error) {
-    console.error('Error getting data from Realtime DB: ', error);
+    console.error(`Error getting document from ${collectionName}:`, error);
     throw error;
   }
+};
+
+// Firestoreデータ取得 (コレクション)
+export const getDocuments = async <T>(
+  collectionName: FirestoreCollection,
+  constraints: QueryConstraint[] = []
+): Promise<T[]> => {
+  try {
+    const q = query(collection(db, collectionName), ...constraints);
+    const querySnapshot = await getDocs(q);
+    
+    return querySnapshot.docs.map((doc) => {
+      return { id: doc.id, ...doc.data() } as T;
+    });
+  } catch (error) {
+    console.error(`Error getting documents from ${collectionName}:`, error);
+    throw error;
+  }
+};
+
+// Firestoreデータ更新
+export const updateDocument = async <T extends Record<string, unknown>>(
+  collectionName: FirestoreCollection,
+  docId: string,
+  data: Partial<T>
+): Promise<void> => {
+  try {
+    const docRef = doc(db, collectionName, docId);
+    await updateDoc(docRef, data as DocumentData);
+  } catch (error) {
+    console.error(`Error updating document in ${collectionName}:`, error);
+    throw error;
+  }
+};
+
+// Firestoreデータ削除
+export const deleteDocument = async (
+  collectionName: FirestoreCollection,
+  docId: string
+): Promise<void> => {
+  try {
+    const docRef = doc(db, collectionName, docId);
+    await deleteDoc(docRef);
+  } catch (error) {
+    console.error(`Error deleting document from ${collectionName}:`, error);
+    throw error;
+  }
+};
+
+// ヘルパー関数 - クエリ制約の作成
+export const createQueryConstraints = (
+  options: {
+    whereField?: string;
+    whereOperator?: '==' | '!=' | '>' | '>=' | '<' | '<=';
+    whereValue?: unknown;
+    orderByField?: string;
+    orderDirection?: 'asc' | 'desc';
+    limitCount?: number;
+  } = {}
+): QueryConstraint[] => {
+  const constraints: QueryConstraint[] = [];
+  
+  if (options.whereField && options.whereOperator && options.whereValue !== undefined) {
+    constraints.push(where(options.whereField, options.whereOperator, options.whereValue));
+  }
+  
+  if (options.orderByField) {
+    constraints.push(orderBy(options.orderByField, options.orderDirection || 'asc'));
+  }
+  
+  if (options.limitCount) {
+    constraints.push(limit(options.limitCount));
+  }
+  
+  return constraints;
 };

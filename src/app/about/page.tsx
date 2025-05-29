@@ -3,6 +3,78 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useEffect, useState } from 'react';
 
+// 経歴データの型定義
+type History = {
+  period: string;
+  role: string;
+  company: string;
+  description: string[];
+};
+
+// 経歴データ
+const histories: History[] = [
+  {
+    period: '2023年11月 - 現在',
+    role: 'バックエンドエンジニア',
+    company: 'Saasメガベンチャー企業（フリーランス）',
+    description: [
+      '会計システムのバックエンド開発を担当',
+      'マイクロサービスアーキテクチャの設計と実装',
+      'TypeScript、Kotlin、Spring Boot、GraphQLを使用',
+    ],
+  },
+  {
+    period: '2022年5月 - 2023年10月',
+    role: 'フルスタックエンジニア',
+    company: 'Saas企業（フリーランス）',
+    description: [
+      'APIやバッチ開発、フロントエンド開発を担当',
+      'インフラ周りの設計と実装',
+      'Laravel、Next.js、AWS、MCPサーバーを使用',
+    ],
+  },
+  {
+    period: '2020年2月 - 2022年4月',
+    role: 'バックエンドエンジニア',
+    company: '受託系開発会社',
+    description: [
+      'スクレイピングツールやデータ移行ツールの開発',
+      'API開発、バッチ開発、ホームページ開発',
+      'PHP、Laravel、MySQL、AWS、Vue.jsを使用',
+    ],
+  },
+  {
+    period: '2019年10月 - 2020年1月',
+    role: 'コンサル兼開発エンジニア',
+    company: 'VRプラットフォームスタートアップ',
+    description: [
+      'VRプラットフォームの機能改善',
+      '10名規模のスタートアップでの開発業務',
+      'Unity、C#を使用',
+    ],
+  },
+  {
+    period: '2017年11月 - 2019年9月',
+    role: 'コンサル/インフラエンジニア',
+    company: 'HR系パッケージ開発会社',
+    description: [
+      'PM業務とインフラエンジニアを兼任',
+      'Windowsサーバー、Tomcat、Oracleの構築と運用',
+      'システム導入支援とカスタマイズ開発',
+    ],
+  },
+  {
+    period: '2017年4月 - 2017年10月',
+    role: 'フロントエンドエンジニア',
+    company: 'HR系パッケージ開発会社',
+    description: [
+      'フロントエンド開発の基礎技術を習得',
+      'HTML、CSS、JavaScript、jQueryを使用',
+      'パッケージソフトウェアのUI開発',
+    ],
+  },
+];
+
 export default function AboutPage() {
   const [scrollOpacity, setScrollOpacity] = useState(0.3);
 
@@ -29,44 +101,44 @@ export default function AboutPage() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12 bg-background/60 p-6 rounded-lg backdrop-blur-sm">
+          <div className="text-center mb-12 bg-background/80 p-6 rounded-lg backdrop-blur-sm">
             <h1 className="text-4xl font-bold mb-4">プロフィール</h1>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-foreground">
               私の経歴、スキル、開発への情熱についてご紹介します。
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            <Card className="bg-background/60 backdrop-blur-sm">
+            <Card className="bg-background/80 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle>自己紹介</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-foreground leading-relaxed">
                   初めまして。ウェブエンジニアをしている森生と申します。
                 </p>
                 <br />
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-foreground leading-relaxed">
                   新卒で自社パッケージソフトウェア会社に入社。フロントエンド開発を1年、
                   コンサルとしてパッケージ導入、運用保守を1.5年、同時期にインフラエンジニアとしてインフラ構築を1.5年しました。
                 </p>
                 <br />
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-foreground leading-relaxed">
                   その後web系の受託開発会社に転職し、2年半ほどバックエンドエンジニアとして、バックエンド周りのパッケージ開発やAPI開発をしました。
                 </p>
                 <br />
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-foreground leading-relaxed">
                   現在はフリーランスエンジニアとしてバックエンド周りからフロントエンド、AIエージェントの開発を行っています。
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-background/60 backdrop-blur-sm">
+            <Card className="bg-background/80 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle>専門分野</CardTitle>
               </CardHeader>
               <CardContent>
-                <ul className="space-y-3 text-muted-foreground">
+                <ul className="space-y-3 text-foreground">
                   <li>• React、Next.js、TypeScriptを使用したフロントエンド開発</li>
                   <li>• Node.jsとPythonを使用したバックエンド開発</li>
                   <li>• データベース設計と管理</li>
@@ -78,7 +150,35 @@ export default function AboutPage() {
             </Card>
           </div>
 
-          <Card className="bg-background/60 backdrop-blur-sm">
+          {/* 経歴セクション */}
+          <Card className="bg-background/80 backdrop-blur-sm mb-12">
+            <CardHeader>
+              <CardTitle>経歴</CardTitle>
+              <CardDescription>これまでのキャリア</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-8">
+                {histories.map((history, index) => (
+                  <div key={index} className="relative pl-4 border-l-2 border-primary/30">
+                    <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary/80" />
+                    <div className="mb-2">
+                      <h3 className="text-lg font-semibold text-foreground">{history.role}</h3>
+                      <p className="text-sm text-muted-foreground">
+                        {history.company} | {history.period}
+                      </p>
+                    </div>
+                    <ul className="list-disc list-inside space-y-1 text-foreground">
+                      {history.description.map((desc, i) => (
+                        <li key={i}>{desc}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-background/80 backdrop-blur-sm">
             <CardHeader>
               <CardTitle>技術スキル</CardTitle>
               <CardDescription>日常的に使用している技術とツール</CardDescription>
@@ -87,7 +187,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                   <h3 className="font-semibold mb-3">フロントエンド</h3>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
+                  <ul className="space-y-1 text-sm text-foreground">
                     <li>React / Next.js</li>
                     <li>TypeScript</li>
                     <li>Tailwind CSS</li>
@@ -97,7 +197,7 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-3">バックエンド</h3>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
+                  <ul className="space-y-1 text-sm text-foreground">
                     <li>Node.js / Express</li>
                     <li>Kotlin / Spring Boot</li>
                     <li>PHP</li>
@@ -110,7 +210,7 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-3">開発ツール</h3>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
+                  <ul className="space-y-1 text-sm text-foreground">
                     <li>Git / GitHub</li>
                     <li>Vercel / Netlify</li>
                     <li>AWS / Google Cloud</li>

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { BackgroundVideo } from '@/components/background-video';
 import { Navigation } from '@/components/navigation';
+import { Toaster } from 'sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -30,6 +31,7 @@ export default function RootLayout({
         <BackgroundVideo />
         <Navigation />
         {children}
+        <Toaster position="bottom-right" />
       </body>
     </html>
   );
