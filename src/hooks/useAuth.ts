@@ -1,7 +1,16 @@
 import { useState, useEffect } from 'react';
-import { User, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import {
+  User,
+  signInWithEmailAndPassword,
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+  browserLocalPersistence,
+  setPersistence,
+} from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -41,24 +50,28 @@ export const useAuth = () => {
       const provider = new GoogleAuthProvider();
       // 日本語でログインUIを表示
       auth.languageCode = 'ja';
-      // 特定のドメインのみを許可（オプション）
-      provider.setCustomParameters({
-        hd: 'your-domain.com' // 許可するドメインを指定
-      });
+
+      // ログインの永続性を設定
+      await setPersistence(auth, browserLocalPersistence);
+
       const result = await signInWithPopup(auth, provider);
-      // セッションクッキーを設定
-      const idToken = await result.user.getIdToken();
-      // セッションクッキーを設定するAPIエンドポイントを呼び出す
-      await fetch('/api/auth/session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token: idToken }),
-      });
-      router.push('/admin');
-    } catch (error) {
+
+      if (result.user) {
+        toast.success('ログインしました');
+        router.push('/admin');
+      }
+    } catch (error: any) {
       console.error('Google login error:', error);
+
+      // エラーメッセージをユーザーフレンドリーに表示
+      if (error.code === 'auth/popup-closed-by-user') {
+        toast.error('ログインがキャンセルされました');
+      } else if (error.code === 'auth/cancelled-popup-request') {
+        toast.error('ログインウィンドウが閉じられました');
+      } else {
+        toast.error('ログインに失敗しました。もう一度お試しください');
+      }
+
       throw error;
     }
   };
@@ -70,9 +83,11 @@ export const useAuth = () => {
       await fetch('/api/auth/session', {
         method: 'DELETE',
       });
+      toast.success('ログアウトしました');
       router.push('/');
     } catch (error) {
       console.error('Logout error:', error);
+      toast.error('ログアウトに失敗しました');
       throw error;
     }
   };
@@ -84,4 +99,4 @@ export const useAuth = () => {
     loginWithGoogle,
     logout,
   };
-}; 
+};

@@ -30,9 +30,7 @@ export default function LoginPage() {
           <Card>
             <CardHeader>
               <CardTitle>管理者ログイン</CardTitle>
-              <CardDescription>
-                管理画面にアクセスするにはログインが必要です
-              </CardDescription>
+              <CardDescription>管理画面にアクセスするにはログインが必要です</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -66,4 +64,4 @@ export default function LoginPage() {
       </div>
     </main>
   );
-} 
+}

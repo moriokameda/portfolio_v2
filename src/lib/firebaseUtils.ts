@@ -51,11 +51,11 @@ export const getDocument = async <T>(
   try {
     const docRef = doc(db, collectionName, docId);
     const docSnap = await getDoc(docRef);
-    
+
     if (docSnap.exists()) {
       return { id: docSnap.id, ...docSnap.data() } as T;
     }
-    
+
     return null;
   } catch (error) {
     console.error(`Error getting document from ${collectionName}:`, error);
@@ -71,7 +71,7 @@ export const getDocuments = async <T>(
   try {
     const q = query(collection(db, collectionName), ...constraints);
     const querySnapshot = await getDocs(q);
-    
+
     return querySnapshot.docs.map((doc) => {
       return { id: doc.id, ...doc.data() } as T;
     });
@@ -122,18 +122,18 @@ export const createQueryConstraints = (
   } = {}
 ): QueryConstraint[] => {
   const constraints: QueryConstraint[] = [];
-  
+
   if (options.whereField && options.whereOperator && options.whereValue !== undefined) {
     constraints.push(where(options.whereField, options.whereOperator, options.whereValue));
   }
-  
+
   if (options.orderByField) {
     constraints.push(orderBy(options.orderByField, options.orderDirection || 'asc'));
   }
-  
+
   if (options.limitCount) {
     constraints.push(limit(options.limitCount));
   }
-  
+
   return constraints;
 };

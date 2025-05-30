@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
-import { FirestoreExample } from '@/components/firestore-example';
+import { ProjectChat } from '@/components/project-chat';
 import { Button } from '@/components/ui/button';
 
 export default function AdminPage() {
@@ -38,7 +38,7 @@ export default function AdminPage() {
             <div className="text-center bg-background/80 p-6 rounded-lg backdrop-blur-sm">
               <h1 className="text-4xl font-bold mb-4">管理画面</h1>
               <p className="text-xl text-foreground">
-                Cloud Firestoreにデータを追加・取得する管理機能です
+                プロジェクト情報をチャット形式で登録・管理できます
               </p>
             </div>
             <Button variant="outline" onClick={logout}>
@@ -46,9 +46,9 @@ export default function AdminPage() {
             </Button>
           </div>
 
-          <FirestoreExample />
+          <ProjectChat />
         </div>
       </div>
     </main>
   );
-} 
+}
