@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import type { IconType } from 'react-icons';
+import Link from 'next/link';
 import {
   SiAmazon,
   SiGo,
@@ -61,9 +62,11 @@ export default function Home() {
             モダンな技術を使用して、素晴らしいデジタル体験を創造するエンジニアです。
           </p>
           <div className="flex gap-4 justify-center">
-            <Button size="lg">作品を見る</Button>
-            <Button variant="outline" size="lg">
-              お問い合わせ
+            <Button asChild size="lg">
+              <Link href="/projects">作品を見る</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link href="/contact">お問い合わせ</Link>
             </Button>
           </div>
         </div>

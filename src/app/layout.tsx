@@ -16,15 +16,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Portfolio V2',
-  description: 'A modern portfolio website built with Next.js, TypeScript, and ShadCN UI',
+  title: 'Mkame Portfolio',
+  description: 'Mkameのポートフォリオサイトです。',
+  icons: {
+    icon: './icon.png',
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="ja">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>

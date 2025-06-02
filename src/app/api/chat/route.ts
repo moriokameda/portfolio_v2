@@ -62,13 +62,27 @@ export async function POST(request: NextRequest) {
     });
 
     const response = completion.choices[0].message;
-    let result;
+    let result: {
+      type: 'message' | 'data' | 'showProjects';
+      message?: string;
+      data?: {
+        title: string;
+        description: string;
+        technologies: string[];
+        imagePath: string;
+        github?: string;
+        demo: string;
+      };
+    } = {
+      type: 'message',
+      message: response.content || '',
+    };
 
     try {
       // レスポンスがJSONかどうかを確認
       const content = response.content || '';
       const jsonMatch = content.match(/\{[\s\S]*\}/);
-      
+
       if (jsonMatch) {
         const jsonData = JSON.parse(jsonMatch[0]);
         if (jsonData.data) {
@@ -98,7 +112,7 @@ export async function POST(request: NextRequest) {
           message: content,
         };
       }
-    } catch (error) {
+    } catch {
       // JSON解析に失敗した場合は通常のメッセージとして扱う
       result = {
         type: 'message',
@@ -109,9 +123,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(result);
   } catch (error) {
     console.error('Chat API Error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process the request' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to process the request' }, { status: 500 });
   }
 }

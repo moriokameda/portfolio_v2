@@ -1,17 +1,11 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback, useLayoutEffect } from 'react';
+import { useState, useRef, useLayoutEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import {
-  addDocument,
-  getDocuments,
-  deleteDocument,
-  createQueryConstraints,
-} from '@/lib/firebaseUtils';
 import { toast } from 'sonner';
 import { Textarea } from './ui/textarea';
+import type { Project } from '@/types/project';
 
 // メッセージの型定義
 type Message = {
@@ -23,18 +17,7 @@ type Message = {
 type ApiResponse = {
   type: 'message' | 'data' | 'showProjects';
   message?: string;
-  data?: ProjectData;
-};
-
-// プロジェクトデータの型定義
-type ProjectData = {
-  id?: string;
-  title: string;
-  description: string;
-  technologies: string[];
-  imagePath: string;
-  github?: string;
-  demo: string;
+  data?: Project;
 };
 
 export function ProjectChat() {
@@ -46,83 +29,14 @@ export function ProjectChat() {
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [projects, setProjects] = useState<ProjectData[]>([]);
-  const [showProjectList, setShowProjectList] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  // プロジェクト一覧を取得
-  const fetchProjects = useCallback(async () => {
-    try {
-      // プロジェクトを作成日時の降順で取得
-      const constraints = createQueryConstraints({
-        orderByField: 'createdAt',
-        orderDirection: 'desc',
-      });
-      const data = await getDocuments<ProjectData>('projects', constraints);
-      setProjects(data || []);
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-      toast.error('プロジェクトの取得に失敗しました');
-    }
-  }, []);
-
-  // 初回読み込み時にプロジェクト一覧を取得
-  useEffect(() => {
-    fetchProjects();
-  }, [fetchProjects]);
 
   // メッセージが追加されたら自動スクロール
   useLayoutEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-
-  // プロジェクトを登録
-  const registerProject = async (projectData: ProjectData) => {
-    try {
-      // タイムスタンプを追加
-      const dataWithTimestamp = {
-        ...projectData,
-        createdAt: new Date().toISOString(),
-      };
-
-      // Firestoreに登録
-      const docId = await addDocument('projects', dataWithTimestamp);
-      console.log('Document written with ID: ', docId);
-      
-      await fetchProjects();
-      toast.success('プロジェクトを登録しました');
-      
-      // 確認メッセージを追加
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: 'assistant',
-          content: 'プロジェクトを登録しました。他のプロジェクトも登録しますか？',
-        },
-      ]);
-    } catch (error) {
-      console.error('Error registering project:', error);
-      
-      // エラーメッセージをより詳細に
-      let errorMessage = 'プロジェクトの登録に失敗しました';
-      if (error instanceof Error) {
-        if (error.message.includes('permission-denied')) {
-          errorMessage = 'アクセス権限がありません。ログインしているか確認してください。';
-        } else if (error.message.includes('not-found')) {
-          errorMessage = 'プロジェクトコレクションが見つかりません。';
-        }
-      }
-      
-      toast.error(errorMessage);
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: 'assistant',
-          content: `${errorMessage} もう一度お試しください。`,
-        },
-      ]);
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  }); // 依存配列を空にして、レイアウトの更新時に常に実行されるようにする
 
   // メッセージを送信
   const handleSubmit = async (e: React.FormEvent) => {
@@ -161,18 +75,6 @@ export function ProjectChat() {
           { role: 'assistant', content: result.message || 'エラーが発生しました' },
         ]);
       }
-
-      // プロジェクト一覧の表示/非表示を切り替え
-      if (result.type === 'showProjects') {
-        setShowProjectList(true);
-      } else {
-        setShowProjectList(false);
-      }
-
-      // プロジェクトデータが含まれている場合は登録
-      if (result.type === 'data' && result.data) {
-        await registerProject(result.data);
-      }
     } catch (error) {
       console.error('Error:', error);
       toast.error('エラーが発生しました');
@@ -188,24 +90,10 @@ export function ProjectChat() {
     }
   };
 
-  // プロジェクトを削除
-  const handleDeleteProject = async (id: string) => {
-    if (!id || !window.confirm('このプロジェクトを削除してもよろしいですか？')) return;
-
-    try {
-      await deleteDocument('projects', id);
-      toast.success('プロジェクトを削除しました');
-      await fetchProjects();
-    } catch (error) {
-      console.error('Error deleting project:', error);
-      toast.error('プロジェクトの削除に失敗しました');
-    }
-  };
-
   return (
     <div className="space-y-8">
       {/* チャットインターフェース */}
-      <Card>
+      <Card className="bg-background/80 backdrop-blur-sm">
         <CardHeader>
           <CardTitle>プロジェクト登録アシスタント</CardTitle>
           <CardDescription>プロジェクトの情報を会話形式で入力できます。</CardDescription>
@@ -213,7 +101,7 @@ export function ProjectChat() {
         <CardContent>
           <div className="space-y-4">
             {/* メッセージ表示エリア */}
-            <div className="h-[400px] overflow-y-auto space-y-4 p-4 border rounded-lg">
+            <div className="h-[400px] overflow-y-auto space-y-4 p-4 border rounded-lg bg-background/50">
               {messages.map((message, i) => (
                 <div
                   key={`${message.role}-${i}-${message.content.substring(0, 10)}`}
@@ -224,8 +112,8 @@ export function ProjectChat() {
                       message.role === 'user'
                         ? 'bg-primary text-primary-foreground'
                         : message.role === 'assistant'
-                        ? 'bg-muted'
-                        : 'bg-secondary text-secondary-foreground text-sm'
+                          ? 'bg-muted'
+                          : 'bg-secondary text-secondary-foreground text-sm'
                     }`}
                   >
                     <p className="whitespace-pre-wrap">{message.content}</p>
@@ -251,47 +139,6 @@ export function ProjectChat() {
           </div>
         </CardContent>
       </Card>
-
-      {/* プロジェクト一覧 */}
-      {showProjectList && (
-        <Card>
-          <CardHeader>
-            <CardTitle>登録済みプロジェクト</CardTitle>
-            <CardDescription>現在登録されているプロジェクトの一覧です</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {projects.map((project) => (
-                <Card key={project.id} className="p-4">
-                  <div className="flex justify-between">
-                    <div>
-                      <h3 className="text-lg font-semibold">{project.title}</h3>
-                      <p className="text-sm text-muted-foreground">{project.description}</p>
-                      <div className="flex flex-wrap gap-1 mt-2">
-                        {project.technologies.map((tech, i) => (
-                          <span
-                            key={`${project.id}-${tech}-${i}`}
-                            className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded-md"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <Button
-                      variant="destructive"
-                      size="sm"
-                      onClick={() => project.id && handleDeleteProject(project.id)}
-                    >
-                      削除
-                    </Button>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      )}
     </div>
   );
 }

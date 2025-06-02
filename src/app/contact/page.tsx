@@ -14,23 +14,26 @@ import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   name: z.string().min(2, {
-    message: 'Name must be at least 2 characters.',
+    message: '名前は2文字以上で入力をお願いいたします。',
   }),
   email: z.string().email({
-    message: 'Please enter a valid email address.',
+    message: 'メールアドレスが不正です。',
   }),
-  subject: z.string().min(5, {
-    message: 'Subject must be at least 5 characters.',
+  subject: z.string().min(1, {
+    message: '件名は1文字以上入力してください。',
   }),
-  message: z.string().min(10, {
-    message: 'Message must be at least 10 characters.',
+  message: z.string().min(1, {
+    message: '問い合わせ内容は1文字以上入力してください。',
   }),
 });
 
 export default function ContactPage() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,11 +44,28 @@ export default function ContactPage() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    // Here you would typically send the form data to your backend
-    alert("Thank you for your message! I'll get back to you soon.");
-    form.reset();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'メール送信に失敗しました');
+      }
+
+      toast.success('メッセージを送信しました');
+      form.reset();
+      router.push('/');
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'メール送信に失敗しました');
+    }
   }
 
   return (

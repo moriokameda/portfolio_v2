@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
+import type { User } from 'firebase/auth';
 import {
-  User,
   signInWithEmailAndPassword,
   signOut,
   GoogleAuthProvider,
@@ -8,6 +8,7 @@ import {
   browserLocalPersistence,
   setPersistence,
 } from 'firebase/auth';
+import { FirebaseError } from 'firebase/app';
 import { auth } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -27,22 +28,18 @@ export const useAuth = () => {
   }, []);
 
   const login = async (email: string, password: string) => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      // セッションクッキーを設定
-      const idToken = await userCredential.user.getIdToken();
-      // セッションクッキーを設定するAPIエンドポイントを呼び出す
-      await fetch('/api/auth/session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token: idToken }),
-      });
-      router.push('/admin');
-    } catch (error) {
-      throw error;
-    }
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    // セッションクッキーを設定
+    const idToken = await userCredential.user.getIdToken();
+    // セッションクッキーを設定するAPIエンドポイントを呼び出す
+    await fetch('/api/auth/session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token: idToken }),
+    });
+    router.push('/admin');
   };
 
   const loginWithGoogle = async () => {
@@ -60,14 +57,18 @@ export const useAuth = () => {
         toast.success('ログインしました');
         router.push('/admin');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Google login error:', error);
 
       // エラーメッセージをユーザーフレンドリーに表示
-      if (error.code === 'auth/popup-closed-by-user') {
-        toast.error('ログインがキャンセルされました');
-      } else if (error.code === 'auth/cancelled-popup-request') {
-        toast.error('ログインウィンドウが閉じられました');
+      if (error instanceof FirebaseError) {
+        if (error.code === 'auth/popup-closed-by-user') {
+          toast.error('ログインがキャンセルされました');
+        } else if (error.code === 'auth/cancelled-popup-request') {
+          toast.error('ログインウィンドウが閉じられました');
+        } else {
+          toast.error('ログインに失敗しました。もう一度お試しください');
+        }
       } else {
         toast.error('ログインに失敗しました。もう一度お試しください');
       }

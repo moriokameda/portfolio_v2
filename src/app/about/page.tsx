@@ -158,18 +158,19 @@ export default function AboutPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-8">
-                {histories.map((history, index) => (
-                  <div key={index} className="relative pl-4 border-l-2 border-primary/30">
+                {histories.map((history) => (
+                  <div
+                    key={`${history.period}-${history.role}`}
+                    className="relative pl-4 border-l-2 border-primary/30"
+                  >
                     <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary/80" />
                     <div className="mb-2">
-                      <h3 className="text-lg font-semibold text-foreground">{history.role}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        {history.company} | {history.period}
-                      </p>
+                      <div className="text-sm text-muted-foreground">{history.period}</div>
+                      <div className="font-semibold">{history.role}</div>
                     </div>
                     <ul className="list-disc list-inside space-y-1 text-foreground">
-                      {history.description.map((desc, i) => (
-                        <li key={i}>{desc}</li>
+                      {history.description.map((desc) => (
+                        <li key={desc}>{desc}</li>
                       ))}
                     </ul>
                   </div>

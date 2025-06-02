@@ -1,0 +1,76 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "スナックホームページ",
+      "description": "HTML、JQuery、Bootstrapを使用したホームページの開発",
+      "technologies": ["HTML", "javascript", "Bootstrap", "JQuery"],
+      "imageUrl": "snack-yu.png",
+      "githubUrl": null,
+      "liveUrl": "https://www.yushima-snack-you.com/"
+    },
+    {
+      "id": 2,
+      "title": "カスタマーサクセス支援Saas",
+      "description": "カスタマーサクセスや営業のデジタルセールスルームシステムの開発",
+      "technologies": ["Vue.js", "PHP", "Laravel", "MySQL", "Docker", "AWS"],
+      "imageUrl": "openpage.png",
+      "githubUrl": null,
+      "liveUrl": "https://www.openpage.jp/"
+    },
+    {
+      "id": 3,
+      "title": "マッスルフォトサービス",
+      "description": "パーソナルトレーニングの経過写真を使い、ユーザーのトレーニングをサポートするサービス",
+      "technologies": ["React", "MUI", "Laravel", "Docker"],
+      "imageUrl": "mascle-photo.png",
+      "githubUrl": null,
+      "liveUrl": "https://muscle-photo.com"
+    },
+    {
+      "id": 4,
+      "title": "アクアシステム",
+      "description": "アクアシステム社のオンライン展示会サイトの作成",
+      "technologies": ["HTML", "CSS", "Bootstrap", "JQuery", "javascript"],
+      "imageUrl": "aqua-system.png",
+      "githubUrl": null,
+      "liveUrl": "https://www.aqua-system.com/"
+    },
+    {
+      "id": 5,
+      "title": "社内向け人事システム追加開発",
+      "description": "社内向けの人事システムの追加機能開発",
+      "technologies": ["Go", "Docker", "React"],
+      "imageUrl": "mascle-photo.png",
+      "githubUrl": null,
+      "liveUrl": "https://muscle-photo.com"
+    },
+    {
+      "id": 6,
+      "title": "Portfolio V1",
+      "description": "初期の独学で作成したポートフォリオ",
+      "technologies": ["HTML", "CSS"],
+      "imageUrl": "old-portfolio.png",
+      "githubUrl": "https://github.com/moriokameda/portfolio",
+      "liveUrl": "https://moriokameda.github.io/portfolio/"
+    },
+    {
+      "id": 7,
+      "title": "Portfolio V2",
+      "description": "リニューアルしたポートフォリオ開発",
+      "technologies": ["Next.js", "typescript", "Firebase"],
+      "imageUrl": "portfolio-v2.png",
+      "githubUrl": "https://github.com/moriokameda/portfolio_v2",
+      "liveUrl": "https://muscle-photo.com"
+    },
+    {
+      "id": 8,
+      "title": "お絵描きグッズシステム開発",
+      "description": "自分達で書いた絵をTシャツなどにプリントして販売するシステム開発",
+      "technologies": ["Java", "Kotlin", "Spring Boot", "MySQL", "Docker", "AWS", "Unity"],
+      "imageUrl": "portfolio-v3.png",
+      "githubUrl": null,
+      "liveUrl": null
+    }
+  ]
+}
