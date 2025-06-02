@@ -9,6 +9,7 @@ const navigation = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
   { name: 'Projects', href: '/projects' },
+  { name: 'Resume', href: '/resume' },
   { name: 'Contact', href: '/contact' },
 ];
 
@@ -16,10 +17,10 @@ export function Navigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="sticky top-0 z-10 bg-background/60 backdrop-blur-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="text-xl font-bold">
+          <Link href="/" className="text-xl font-bold hover:text-primary transition-colors">
             MkameのPortfolio
           </Link>
 
@@ -31,7 +32,7 @@ export function Navigation() {
                 className={cn(
                   'text-sm font-medium transition-colors hover:text-primary px-3 py-1 rounded-md',
                   pathname === item.href
-                    ? 'text-foreground font-semibold'
+                    ? 'text-foreground font-semibold bg-background/40'
                     : 'text-muted-foreground hover:bg-background/40'
                 )}
               >

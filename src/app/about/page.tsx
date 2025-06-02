@@ -95,7 +95,7 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <main className="min-h-screen py-20 relative">
+    <main className="min-h-screen pt-24 pb-20 relative">
       {/* 白色のオーバーレイ - スクロールに応じて不透明度が変わる */}
       <div className="absolute inset-0 bg-white z-0" style={{ opacity: scrollOpacity }} />
 

@@ -41,9 +41,9 @@
       "title": "社内向け人事システム追加開発",
       "description": "社内向けの人事システムの追加機能開発",
       "technologies": ["Go", "Docker", "React"],
-      "imageUrl": "mascle-photo.png",
+      "imageUrl": "kayac.png",
       "githubUrl": null,
-      "liveUrl": "https://muscle-photo.com"
+      "liveUrl": null
     },
     {
       "id": 6,
@@ -61,14 +61,14 @@
       "technologies": ["Next.js", "typescript", "Firebase"],
       "imageUrl": "portfolio-v2.png",
       "githubUrl": "https://github.com/moriokameda/portfolio_v2",
-      "liveUrl": "https://muscle-photo.com"
+      "liveUrl": "https://www.mkame-portfolio.com/"
     },
     {
       "id": 8,
       "title": "お絵描きグッズシステム開発",
       "description": "自分達で書いた絵をTシャツなどにプリントして販売するシステム開発",
       "technologies": ["Java", "Kotlin", "Spring Boot", "MySQL", "Docker", "AWS", "Unity"],
-      "imageUrl": "portfolio-v3.png",
+      "imageUrl": "oekaki-goods.png",
       "githubUrl": null,
       "liveUrl": null
     }

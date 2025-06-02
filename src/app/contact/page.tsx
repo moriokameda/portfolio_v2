@@ -69,17 +69,17 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-background to-muted py-20">
+    <main className="min-h-screen py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 bg-background/80 backdrop-blur-sm rounded-lg px-6 py-6">
             <h1 className="text-4xl font-bold mb-4">お問い合わせ</h1>
             <p className="text-xl text-muted-foreground">
               お気軽にメッセージをお送りください。できるだけ早くご返信いたします。
             </p>
           </div>
 
-          <Card>
+          <Card className="bg-background/90 backdrop-blur-md">
             <CardHeader>
               <CardTitle>お問い合わせフォーム</CardTitle>
               <CardDescription>
