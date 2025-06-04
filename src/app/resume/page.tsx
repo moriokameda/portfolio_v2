@@ -1,55 +1,21 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React from 'react';
 import resumeData from '@/data/resume.json';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
 import Link from 'next/link';
 
 export default function ResumePage() {
   const { resume } = resumeData;
-  const resumeRef = useRef<HTMLDivElement>(null);
-
-  const generatePDF = async () => {
-    if (!resumeRef.current) return;
-
-    try {
-      const canvas = await html2canvas(resumeRef.current, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-      });
-
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-      const imgWidth = canvas.width;
-      const imgHeight = canvas.height;
-      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
-      const imgX = (pdfWidth - imgWidth * ratio) / 2;
-      const imgY = 30;
-
-      pdf.setFontSize(20);
-      pdf.text('職務経歴書', pdfWidth / 2, 20, { align: 'center' });
-      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
-      pdf.save(`職務経歴書_${resume.name}.pdf`);
-    } catch (error) {
-      console.error('PDF生成エラー:', error);
-    }
-  };
 
   return (
     <div className="container mx-auto py-24 px-4">
       <div className="mb-8 flex flex-col items-center gap-4 bg-background/95 p-6 rounded-lg backdrop-blur-sm">
         <h1 className="text-3xl font-bold text-center">職務経歴書</h1>
-        <Button onClick={generatePDF} className="w-full max-w-xs">PDFでダウンロード</Button>
       </div>
 
-      <div ref={resumeRef} className="space-y-8">
+      <div className="space-y-8">
         <Card className="bg-background/95 backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="text-2xl">{resume.name}</CardTitle>
@@ -62,26 +28,19 @@ export default function ResumePage() {
                 <p className="text-sm leading-relaxed">{resume.summary}</p>
               </div>
             )}
-            {resume.portfolioUrl && (
-              <div className="mt-4">
-                <Link
-                  href={resume.portfolioUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-800 underline text-sm"
-                >
-                  ポートフォリオ: {resume.portfolioUrl}
-                </Link>
-              </div>
-            )}
           </CardContent>
         </Card>
 
         <div>
-          <h2 className="text-2xl font-bold mb-4 bg-background/95 p-4 rounded-lg backdrop-blur-sm">職務経歴</h2>
+          <h2 className="text-2xl font-bold mb-4 bg-background/95 p-4 rounded-lg backdrop-blur-sm">
+            職務経歴
+          </h2>
           <div className="space-y-6">
             {resume.workExperience.map((job) => (
-              <Card key={`job-${job.company}-${job.period}`} className="bg-background/95 backdrop-blur-sm">
+              <Card
+                key={`job-${job.company}-${job.period}`}
+                className="bg-background/95 backdrop-blur-sm"
+              >
                 <CardHeader>
                   <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2">
                     <div>
@@ -95,7 +54,9 @@ export default function ResumePage() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="mb-4 text-sm leading-relaxed bg-background/80 p-4 rounded-lg">{job.description}</p>
+                  <p className="mb-4 text-sm leading-relaxed bg-background/80 p-4 rounded-lg">
+                    {job.description}
+                  </p>
                   <div className="mb-4">
                     <h4 className="font-semibold mb-2 text-sm">主な業務・プロジェクト</h4>
                     <ul className="list-disc pl-5 space-y-1 text-sm bg-background/80 p-4 rounded-lg">
@@ -122,10 +83,15 @@ export default function ResumePage() {
 
         {resume.sideProjects && resume.sideProjects.length > 0 && (
           <div>
-            <h2 className="text-2xl font-bold mb-4 bg-background/95 p-4 rounded-lg backdrop-blur-sm">副業・サイドプロジェクト</h2>
+            <h2 className="text-2xl font-bold mb-4 bg-background/95 p-4 rounded-lg backdrop-blur-sm">
+              副業・サイドプロジェクト
+            </h2>
             <div className="space-y-4">
               {resume.sideProjects.map((project) => (
-                <Card key={`side-${project.project}-${project.period}`} className="bg-background/95 backdrop-blur-sm">
+                <Card
+                  key={`side-${project.project}-${project.period}`}
+                  className="bg-background/95 backdrop-blur-sm"
+                >
                   <CardHeader>
                     <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2">
                       <CardTitle className="text-lg">{project.project}</CardTitle>
@@ -133,7 +99,9 @@ export default function ResumePage() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="mb-4 text-sm leading-relaxed bg-background/80 p-4 rounded-lg">{project.description}</p>
+                    <p className="mb-4 text-sm leading-relaxed bg-background/80 p-4 rounded-lg">
+                      {project.description}
+                    </p>
                     <div>
                       <h4 className="font-semibold mb-2 text-sm">使用技術</h4>
                       <div className="flex flex-wrap gap-2 bg-background/80 p-4 rounded-lg">
@@ -152,10 +120,15 @@ export default function ResumePage() {
         )}
 
         <div>
-          <h2 className="text-2xl font-bold mb-4 bg-background/95 p-4 rounded-lg backdrop-blur-sm">スキル</h2>
+          <h2 className="text-2xl font-bold mb-4 bg-background/95 p-4 rounded-lg backdrop-blur-sm">
+            スキル
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {resume.skills.map((skillGroup) => (
-              <Card key={`skill-${skillGroup.category}`} className="bg-background/95 backdrop-blur-sm">
+              <Card
+                key={`skill-${skillGroup.category}`}
+                className="bg-background/95 backdrop-blur-sm"
+              >
                 <CardHeader>
                   <CardTitle className="text-lg">{skillGroup.category}</CardTitle>
                 </CardHeader>
@@ -175,15 +148,22 @@ export default function ResumePage() {
 
         {resume.strengths && resume.strengths.length > 0 && (
           <div>
-            <h2 className="text-2xl font-bold mb-4 bg-background/95 p-4 rounded-lg backdrop-blur-sm">自己PR・強み</h2>
+            <h2 className="text-2xl font-bold mb-4 bg-background/95 p-4 rounded-lg backdrop-blur-sm">
+              自己PR・強み
+            </h2>
             <div className="space-y-4">
               {resume.strengths.map((strength) => (
-                <Card key={`strength-${strength.title}`} className="bg-background/95 backdrop-blur-sm">
+                <Card
+                  key={`strength-${strength.title}`}
+                  className="bg-background/95 backdrop-blur-sm"
+                >
                   <CardHeader>
                     <CardTitle className="text-lg">{strength.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm leading-relaxed bg-background/80 p-4 rounded-lg">{strength.description}</p>
+                    <p className="text-sm leading-relaxed bg-background/80 p-4 rounded-lg">
+                      {strength.description}
+                    </p>
                   </CardContent>
                 </Card>
               ))}

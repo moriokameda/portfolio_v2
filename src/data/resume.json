@@ -127,8 +127,8 @@
     "sideProjects": [
       {
         "period": "2024年7月〜現在",
-        "project": "不動産管理業界のSaaS製品リニューアル開発",
-        "description": "不動産管理業務にまつわるSaaS製品のリニューアル、システム改善のテックリードを担当。",
+        "project": "不動産管理業界のSaaS製品開発",
+        "description": "不動産管理業務にまつわるSaaS製品のリニューアル、システム改善のテックリードやAIエージェント開発を担当",
         "technologies": ["Kotlin", "Go", "Docker", "Laravel", "AWS", "GraphQL", "Next.js"]
       },
       {
